@@ -21,6 +21,9 @@
 % setup for class presentation slides
 \documentclass[10pt,hyperref={colorlinks=true,linkcolor=blue,citecolor=citelink,urlcolor=gray}]{beamer}
 \fi
+\usepackage{tikz} 
+\usepgflibrary{arrows.meta}
+\usetikzlibrary{bending}
 
 \usepackage{mathptmx}
 \usefonttheme{professionalfonts}
@@ -207,7 +210,7 @@ Now
 \begin{frame}[t]
 \frametitle{Pairwise Comparisons Eigenvector}
 {\small
-\vspace{-1.75ex}
+\vspace{-2ex}
 \begin{block}{The Criteria Ranking}
 The normalized eigenvector gives the relative ranking of the criteria.
 \vspace{-1.5ex}
@@ -222,7 +225,7 @@ Measure the consistency of the comparisons with the formulas
 \vspace{-1ex}
 \[	CI(\lambda_m) = \frac{\lambda_m - n}{n-1} \text{\qquad and\qquad} CR = CI(\lambda_m)/RI
 	\vspace{-1ex}	\]
-where $RI$ is from the following table listing \emph{random indices}. 
+where $RI$ is from the following table\footnotemark\ listing \emph{random indices}. 
 \vspace{1ex}
 
 \centerline{\scriptsize\begin{tabular}{c | *{10}{c}}
@@ -233,6 +236,7 @@ $n$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
 \vspace{1ex}
 A ratio $CR < 0.1$ is good. {\scriptsize\it(Larger values mean the comparisons need revision.)}
 \end{block}}
+\footnotetext{From \href{http://www.amazon.com/Decision-Making-Leaders-Hierarchy-Decisions/dp/096203178X/ref=sr_1_1?ie=UTF8&qid=1361555383&sr=8-1&keywords=decision+making+for+leaders}{\emph{Decision Making for Leaders,}} Saaty, RWS Pub, Pittsburgh, 2001.}
 \end{frame}
 
 %%%%%%
@@ -385,12 +389,12 @@ For each criterion, construct the pairwise comparison matrix \\[2ex]
 \frametitle{Combining Multiple Assessments Example}
 \vspace{-1ex}
 {\small
-\begin{block}{Simple Example}
+\begin{block}{Simple Example: First Method}
 Given three assessment matrices 
 \vspace{-1ex}
-\[	PM1 = \begin{bmatrix} 1&2&3 \\ 1/2&1&1/4 \\ 1/3&4&1 \end{bmatrix}, 
-	\quad PM2 = \begin{bmatrix} 1&3&1/2 \\ 1/3&1&2 \\ 2&1/2&1 \end{bmatrix},
-	\quad PM3 = \begin{bmatrix} 1&1/2&5 \\ 2&1&3 \\ 1/5&1/3&1 \end{bmatrix},
+\[	PM1 = \begin{bmatrix} 1&2&3 \\ 1/2&1&1/4 \\ 1/3&4&1 \end{bmatrix}\!\!, 
+	\quad PM2 = \begin{bmatrix} 1&3&1/2 \\ 1/3&1&2 \\ 2&1/2&1 \end{bmatrix}\!\!,
+	\quad PM3 = \begin{bmatrix} 1&1/2&5 \\ 2&1&3 \\ 1/5&1/3&1 \end{bmatrix}
 	\vspace{-1ex}	\]
 \pause
 
@@ -407,6 +411,33 @@ The critical property of geometric means needed is
 \vspace{-1ex}
 \[	\operatorname{GeometricMean}(1/x_i) = 1/ \operatorname{GeometricMean}(x_i).	\]
 \end{block}
+}
+\end{frame}
+
+%%%%%%
+\begin{frame}
+\frametitle{Aggregation Diagram}
+{\footnotesize
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}
+	\node (TL) at (0,0) [inner sep=10pt, draw, fill=yellow!60!blue!10, align=center] {Individual \\ Assessments};
+	\node (TR) at (6,0) [inner sep=10pt, draw, fill=yellow!60!blue!10, align=center] {Aggregate \\ Assessments};
+	\node (BL) at (0,-4) [inner sep=10pt, draw, fill=yellow!60!blue!10, align=center] {Individual \\ Hierarchies};
+	\node (BR) at (6,-4) [inner sep=10pt, draw, fill=yellow!60!blue!10, align=center] {Aggregate \\ Hierarchy};
+	\draw[line width=1pt, Circle-Stealth] (TL) -- (TR) node [above, align=center, midway] {\emph{geometric mean}};
+	\draw[line width=1pt, Circle-Stealth] (BL) -- (BR) node [below, align=center, midway] {\emph{geometric mean}};
+	\draw[line width=1pt, Circle-Stealth] (TL) -- (BL) node [left, align=center, midway] {\emph{AHP}};
+	\draw[line width=1pt, Circle-Stealth] (TR) -- (BR) node [right, align=center, midway] {\emph{AHP}};
+	
+	\draw[line width=1pt, Circle-Stealth, black!40] (3,-0.8) .. controls (5,-1) .. (5,-2.25);
+	\node at (4.5,-1.25) [inner sep=5pt, fill=white] {Method I};
+	\draw[line width=1pt, Circle-Stealth, black!50] (1,-1.7) .. controls (1,-3.) .. (2.5,-3.25);
+	\node at (1.5,-2.75) [inner sep=5pt, fill=white] {Method II};
+\end{tikzpicture}
+\caption{Aggregating Multiple Agents: Two Methods\label{AggDiag}}
+\end{center}
+\end{figure}
 }
 \end{frame}
 
